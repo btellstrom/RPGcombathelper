@@ -1,0 +1,40 @@
+{
+  "name": "Aragorn",
+  "stats": {
+    "hp": 40,
+    "max_hp": 40,
+    "armour_class": 16,
+    "strength": 18,
+    "dexterity": 14,
+    "constitution": 16,
+    "intelligence": 12,
+    "wisdom": 14,
+    "charisma": 16
+  },
+  "inventory": {
+    "Longsword": {
+      "name": "Longsword",
+      "quantity": 1,
+      "description": "A finely crafted blade."
+    },
+    "Healing Potion": {
+      "name": "Healing Potion",
+      "quantity": 2,
+      "description": "Restores 2d4+2 hit points."
+    }
+  },
+  "actions": {
+    "Attack": {
+      "name": "Attack",
+      "description": "Melee weapon attack.",
+      "damage": "1d8+4",
+      "recharge": null
+    },
+    "Second Wind": {
+      "name": "Second Wind",
+      "description": "Regain 1d10+5 hit points.",
+      "damage": null,
+      "recharge": "Short Rest"
+    }
+  }
+}
