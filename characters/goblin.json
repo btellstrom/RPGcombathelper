@@ -1,0 +1,46 @@
+{
+  "name": "Goblin",
+  "stats": {
+    "hp": 7,
+    "max_hp": 7,
+    "armour_class": 15,
+    "strength": 8,
+    "dexterity": 14,
+    "constitution": 10,
+    "intelligence": 10,
+    "wisdom": 8,
+    "charisma": 8
+  },
+  "inventory": {
+    "Scimitar": {
+      "name": "Scimitar",
+      "quantity": 1,
+      "description": "A short curved blade."
+    },
+    "Shortbow": {
+      "name": "Shortbow",
+      "quantity": 1,
+      "description": "A small bow with a quiver of 20 arrows."
+    }
+  },
+  "actions": {
+    "Scimitar": {
+      "name": "Scimitar",
+      "description": "Melee weapon attack.",
+      "damage": "1d6+2",
+      "recharge": null
+    },
+    "Shortbow": {
+      "name": "Shortbow",
+      "description": "Ranged weapon attack, range 80/320ft.",
+      "damage": "1d6+2",
+      "recharge": null
+    },
+    "Nimble Escape": {
+      "name": "Nimble Escape",
+      "description": "The goblin can take the Disengage or Hide action as a bonus action.",
+      "damage": null,
+      "recharge": null
+    }
+  }
+}

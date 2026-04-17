@@ -16,4 +16,5 @@ pub enum Command {
 	/// Path to the character JSON file
 	file: PathBuf,
     },
+    Start,
 }

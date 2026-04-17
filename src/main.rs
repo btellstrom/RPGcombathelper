@@ -15,5 +15,6 @@ fn main() {
 	    let character = storage::loader::load_character(&file).unwrap();
 	    cli::display::show_character(&character);
 	}
+	Command::Start => cli::repl::run(),	    
     }
 }

@@ -1,5 +1,6 @@
-use super::{CharacterSheet, Item, Action};
+use super::{Action, CharacterSheet, Item};
 use clap::Args;
+use rand::RngExt;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -28,22 +29,35 @@ impl CharacterSheet for DndCharacter {
     type Stats = DndStats;
 
     fn name(&self) -> &str {
-	&self.name
+        &self.name
     }
 
     fn stats(&self) -> &Self::Stats {
-	&self.stats
+        &self.stats
     }
 
     fn stats_mut(&mut self) -> &mut Self::Stats {
-	&mut self.stats
+        &mut self.stats
     }
 
     fn inventory(&self) -> &HashMap<String, Item> {
-	&self.inventory
+        &self.inventory
     }
 
     fn actions(&self) -> &HashMap<String, Action> {
-	&self.actions
+        &self.actions
     }
+    
+    fn initiative(&self) -> i32 {
+        (roll() as i32) + get_modifier(self.stats.dexterity)
+    }
+}
+
+fn get_modifier(stat: i32) -> i32 {
+    (((stat as f64) - 10.0) / 2.0).floor() as i32
+}
+
+fn roll() -> i32 {
+    let mut rng = rand::rng();
+    rng.random_range(1..=20)
 }

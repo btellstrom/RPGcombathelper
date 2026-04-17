@@ -1,0 +1,67 @@
+{
+  "name": "Gandalf",
+  "stats": {
+    "hp": 58,
+    "max_hp": 58,
+    "armour_class": 12,
+    "strength": 10,
+    "dexterity": 14,
+    "constitution": 14,
+    "intelligence": 20,
+    "wisdom": 18,
+    "charisma": 16
+  },
+  "inventory": {
+    "Staff": {
+      "name": "Staff",
+      "quantity": 1,
+      "description": "A gnarled wooden staff, usable as a quarterstaff."
+    },
+    "Spellbook": {
+      "name": "Spellbook",
+      "quantity": 1,
+      "description": "Contains all prepared spells."
+    },
+    "Spell Slot L1": {
+      "name": "Spell Slot L1",
+      "quantity": 4,
+      "description": null
+    },
+    "Spell Slot L3": {
+      "name": "Spell Slot L3",
+      "quantity": 3,
+      "description": null
+    },
+    "Spell Slot L5": {
+      "name": "Spell Slot L5",
+      "quantity": 2,
+      "description": null
+    }
+  },
+  "actions": {
+    "Fireball": {
+      "name": "Fireball",
+      "description": "A bright streak that explodes in a 20ft radius. Each creature must make a DC 15 Dex save.",
+      "damage": "8d6",
+      "recharge": "Spell Slot L3"
+    },
+    "Magic Missile": {
+      "name": "Magic Missile",
+      "description": "Three darts of magical force, each hitting automatically.",
+      "damage": "1d4+1 per dart",
+      "recharge": "Spell Slot L1"
+    },
+    "Counterspell": {
+      "name": "Counterspell",
+      "description": "Interrupt and cancel a spell being cast within 60ft.",
+      "damage": null,
+      "recharge": "Spell Slot L3"
+    },
+    "Staff Strike": {
+      "name": "Staff Strike",
+      "description": "Melee weapon attack.",
+      "damage": "1d6",
+      "recharge": null
+    }
+  }
+}

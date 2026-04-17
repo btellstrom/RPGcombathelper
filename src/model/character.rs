@@ -27,6 +27,7 @@ pub trait CharacterSheet {
     fn stats_mut(&mut self) -> &mut Self::Stats;
     fn inventory(&self) -> &HashMap<String, Item>;
     fn actions(&self) -> &HashMap<String, Action>;
+    fn initiative(&self) -> i32;
 }
 
 
