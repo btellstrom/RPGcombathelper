@@ -1,0 +1,1 @@
+// Encounter and TurnOrder types
