@@ -1,4 +1,4 @@
-use combathelper::combat::initiative::TurnOrder;
+use combathelper::combat::initiative::{InitiativeEntry, TurnOrder};
 use combathelper::combat::session::Session;
 use combathelper::model::character::dnd::{DndCharacter, DndStats};
 use std::collections::HashMap;
@@ -22,6 +22,10 @@ fn make_character(name: &str, dexterity: i32) -> DndCharacter {
     }
 }
 
+fn make_entry(name: &str, initiative: i32) -> InitiativeEntry {
+    InitiativeEntry { name: name.to_string(), initiative }
+}
+
 #[test]
 fn loaded_character_is_retrievable() {
     let mut session: Session<DndCharacter> = Session::new();
@@ -33,12 +37,12 @@ fn loaded_character_is_retrievable() {
 fn turn_order_is_sorted_descending() {
     let mut session: Session<DndCharacter> = Session::new();
     session.turn_order = Some(TurnOrder::new(vec![
-        ("Goblin".to_string(), 12),
-        ("Aragorn".to_string(), 18),
+        make_entry("Goblin", 12),
+        make_entry("Aragorn", 18),
     ]));
     let order = session.turn_order.unwrap();
     assert_eq!(order.entries.len(), 2);
-    assert!(order.entries[0].1 >= order.entries[1].1);
+    assert!(order.entries[0].initiative >= order.entries[1].initiative);
 }
 
 #[test]
@@ -51,8 +55,8 @@ fn next_turn_returns_none_without_roll() {
 fn next_turn_wraps_around() {
     let mut session: Session<DndCharacter> = Session::new();
     session.turn_order = Some(TurnOrder::new(vec![
-        ("Aragorn".to_string(), 18),
-        ("Goblin".to_string(), 12),
+        make_entry("Aragorn", 18),
+        make_entry("Goblin", 12),
     ]));
     session.next_turn();
     session.next_turn();
