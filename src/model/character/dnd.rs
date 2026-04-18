@@ -47,9 +47,31 @@ impl CharacterSheet for DndCharacter {
     fn actions(&self) -> &HashMap<String, Action> {
         &self.actions
     }
-    
+
     fn initiative(&self) -> i32 {
         (roll() as i32) + get_modifier(self.stats.dexterity)
+    }
+}
+
+impl DndCharacter {
+    pub fn apply_damage(&mut self, amount: i32) {
+	if self.stats.hp < amount {
+	    self.stats.hp = 0;
+	} else {
+	    self.stats.hp = self.stats.hp - amount;   
+	}
+    }
+
+    pub fn apply_heal(&mut self, amount: i32) {
+	if (self.stats.hp + amount) > self.stats.max_hp {
+	    self.stats.hp = self.stats.max_hp;
+	} else {
+	    self.stats.hp = self.stats.hp + amount;   
+	}
+    }
+
+    pub fn health_to_string(&self) -> String {
+        format!("{}/{}", self.stats.hp, self.stats.max_hp)
     }
 }
 

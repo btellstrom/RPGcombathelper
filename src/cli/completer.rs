@@ -19,6 +19,10 @@ impl Completer for CommandCompleter {
             ["show", prefix] => filter_names(&names, prefix, line, pos),
             ["initiative", prefix] => filter_names(&names, prefix, line, pos),
             ["load", prefix] => complete_paths(prefix, line, pos),
+	    ["damage", _] | ["heal", _] if line.ends_with(' ') => {
+		filter_names(&names, "", line, pos)
+	    }
+	    ["damage", prefix] | ["heal", prefix] => filter_names(&names, prefix, line, pos),
             _ => vec![],
         }
     }
@@ -36,6 +40,8 @@ fn filter_commands(prefix: &str, pos: usize) -> Vec<Suggestion> {
         "initiative",
         "order",
         "next",
+	"damage",
+	"heal",
         "quit",
         "exit",
     ];

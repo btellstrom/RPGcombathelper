@@ -20,6 +20,8 @@ enum ReplCommand {
     Quit,
     Unknown,
     SetInitiative(String, i32),
+    Damage(String, i32),
+    Heal(String, i32)
 }
 
 fn parse_command(input: &str) -> ReplCommand {
@@ -35,6 +37,14 @@ fn parse_command(input: &str) -> ReplCommand {
         ["list"] => ReplCommand::List,
         ["order"] => ReplCommand::Order,
         ["next"] => ReplCommand::Next,
+	["heal", name, amount] => match amount.parse::<i32>() {
+	    Ok(n) => ReplCommand::Heal(name.to_string(), n),
+	    Err(_) => ReplCommand::Unknown,
+	}
+	["damage", name, amount] => match amount.parse::<i32>() {
+	    Ok(n) => ReplCommand::Damage(name.to_string(), n),
+	    Err(_) => ReplCommand::Unknown,
+	}
         ["quit"] | ["exit"] => ReplCommand::Quit,
         _ => ReplCommand::Unknown,
     }
@@ -119,6 +129,20 @@ pub fn run() {
                     Some(name) => println!("Turn: {}", name),
                     None => println!("No initiative order. Use 'initiative' first."),
                 },
+		ReplCommand::Heal(name, amount) => match session.characters.get_mut(&name) {
+		    Some(c) => {
+			c.apply_heal(amount);
+			println!("{} heals for {} damage. HP {}", name, amount, c.health_to_string())
+		    }
+		    None => println!("No character by the name of: {}", name)
+		}
+		ReplCommand::Damage(name, amount) => match session.characters.get_mut(&name) {
+		    Some(c) => {
+			c.apply_damage(amount);
+			println!("{} takes {} damage. HP {}", name, amount, c.health_to_string())
+		    }
+		    None => println!("No character by the name of: {}", name)
+		}
                 ReplCommand::Quit => break,
                 ReplCommand::Unknown => println!("Unknown command."),
             },
